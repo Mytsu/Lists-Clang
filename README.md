@@ -6,4 +6,4 @@
 
 ---
 
-Implementação de uma lista duplamente encadeada (*lde*)
+Implementação de uma lista duplamente encadeada (*LDE*)
