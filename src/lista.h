@@ -15,10 +15,13 @@ extern "C" {
 
 #include <stdlib.h>
 
+// Versão do código
 #define VERSAO_LISTA "0.1"
+// Tipo de dado armazenado na lista
+#define TIPO int
 
 typedef struct node {
-    void * valor;
+    TIPO * valor;
     struct node * anterior;
     struct node * proximo;
 } Node;
@@ -31,7 +34,7 @@ typedef struct lista {
 
 // Prototipos de node
 
-Node * lista_novo_node(void * valor);
+Node * lista_novo_node(TIPO * valor);
 
 // Prototipos de lista
 
@@ -39,9 +42,7 @@ Lista * lista_nova();
 
 void lista_destruir(Lista * lst);
 
-Node * lista_inserir(Lista * lst, Node * node, int index);
-
-Node * lista_ipush(Lista * lst, Node * node);
+Node * lista_ipush(Lista * lst, TIPO * node);
 
 Node * lista_ipop(Lista * lst);
 
@@ -49,9 +50,12 @@ Node * lista_fpush(Lista * lst, Node * node);
 
 Node * lista_fpop(Lista * lst);
 
-Node * lista_buscar(Lista * lst, void * node);
+Node * lista_buscar(Lista * lst, TIPO * node);
 
-Node * lista_encontrar(Lista * lst, int index);
+Node * lista_encontrar(Lista * lst, unsigned int index);
+
+Node * lista_alterar(Lista * lst, unsigned int index,
+    TIPO * item);
 
 void lista_remover(Lista * lst, Node * node);
 
