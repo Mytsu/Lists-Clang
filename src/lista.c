@@ -21,8 +21,8 @@ Lista * lista_nova() {
 }
 
 // Desaloca uma lista da memória
-void lista_destruir(Lista * lst) {
-    if(!(lst))
+Lista * lista_destruir(Lista * lst) {
+    if(!lst)
         return;
     unsigned int tam = lst->tam;
     Node * aux = lst->inicio->proximo;
@@ -33,7 +33,7 @@ void lista_destruir(Lista * lst) {
         aux = aux2;
     }
     free(lst);
-    return;
+    return NULL;
 }
 
 // Insere um item no início da lista
@@ -63,6 +63,36 @@ Node * lista_ipop(Lista * lst) {
     Node * node = lst->inicio;
     if(--lst->tam) {
         (lst->inicio = node->proximo)->anterior = NULL;
+    } else {
+        lst->inicio = lst->fim = NULL;
+    }
+    node->anterior = node->proximo = NULL;
+    return node;
+}
+
+Node * lista_fpush(Lista * lst, TIPO * item) {
+    Node * node;
+    if(!(node = (Node*)malloc(sizeof(Node))))
+        return NULL;
+    node->valor = item;
+    if(lst->tam) {
+        node->anterior = lst->fim;        
+        node->proximo = NULL;
+        lst->fim->proximo = node;
+        lst->fim = node;
+    } else {
+        lst->fim = lst->inicio = node;
+    }
+    lst->tam++;
+    return node;   
+}
+
+Node * lista_fpop(Lista * lst) {
+    if(!lst->tam)
+        return NULL;
+    Node * node = lst->fim;
+    if(--lst->tam) {
+        (lst->fim = node->anterior)->proximo = NULL;
     } else {
         lst->inicio = lst->fim = NULL;
     }

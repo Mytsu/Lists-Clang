@@ -36,17 +36,19 @@ typedef struct lista {
 
 Node * lista_novo_node(TIPO * valor);
 
+void lista_destruir_node(Node * node);
+
 // Prototipos de lista
 
 Lista * lista_nova();
 
-void lista_destruir(Lista * lst);
+Lista * lista_destruir(Lista * lst);
 
-Node * lista_ipush(Lista * lst, TIPO * node);
+Node * lista_ipush(Lista * lst, TIPO * item);
 
 Node * lista_ipop(Lista * lst);
 
-Node * lista_fpush(Lista * lst, Node * node);
+Node * lista_fpush(Lista * lst, TIPO * item);
 
 Node * lista_fpop(Lista * lst);
 
@@ -57,7 +59,9 @@ Node * lista_encontrar(Lista * lst, unsigned int index);
 Node * lista_alterar(Lista * lst, unsigned int index,
     TIPO * item);
 
-void lista_remover(Lista * lst, Node * node);
+Node * lista_inserir(Lista * lst, TIPO * item);
+
+Node * lista_remover(Lista * lst, Node * node);
 
 #ifdef __cplusplus
 }
