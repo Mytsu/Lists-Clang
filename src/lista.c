@@ -43,10 +43,15 @@ Node * lista_ipush(Lista * lst, TIPO * item) {
     if(!(node = (Node*)malloc(sizeof(Node))))
         return NULL;
     node->valor = item;
-    node->anterior = NULL;
-    node->proximo = lst->inicio;
-    node->proximo->anterior = node;
-    lst->inicio = node;
+    if(lst->tam) {
+        node->proximo = lst->inicio;        
+        node->anterior = NULL;
+        lst->inicio->anterior = node;
+        lst->inicio = node;
+    } else {
+        lst->inicio = lst->fim = node;
+    }
+    lst->tam++;
     return node;    
 }
 
