@@ -70,6 +70,8 @@ Node * lista_ipop(Lista * lst) {
     return node;
 }
 
+// Insere um item no fim da lista
+// retorna NULL se falhar na alocação do node
 Node * lista_fpush(Lista * lst, TIPO * item) {
     Node * node;
     if(!(node = (Node*)malloc(sizeof(Node))))
@@ -87,6 +89,8 @@ Node * lista_fpush(Lista * lst, TIPO * item) {
     return node;   
 }
 
+// Remove um item do fim da lista
+// retorna null caso a lista esteja vazia
 Node * lista_fpop(Lista * lst) {
     if(!lst->tam)
         return NULL;
