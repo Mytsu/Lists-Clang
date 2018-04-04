@@ -53,11 +53,14 @@ Node * lista_ipush(Lista * lst, TIPO * item) {
 // Remove um item do início da lista
 // retorna null caso a lista esteja vazia
 Node * lista_ipop(Lista * lst) {
-    if(!(lst->inicio))
+    if(!lst->tam)
         return NULL;
     Node * node = lst->inicio;
-    lst->inicio = node->proximo;
-    lst->inicio->anterior = NULL;
-    node->proximo = NULL;
+    if(--lst->tam) {
+        (lst->inicio = node->proximo)->anterior = NULL;
+    } else {
+        lst->inicio = lst->fim = NULL;
+    }
+    node->anterior = node->proximo = NULL;
     return node;
 }
