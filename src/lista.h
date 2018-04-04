@@ -42,7 +42,7 @@ void lista_destruir_node(Node * node);
 
 Lista * lista_nova();
 
-Lista * lista_destruir(Lista * lst);
+void lista_destruir(Lista * lst);
 
 Node * lista_ipush(Lista * lst, TIPO * item);
 

@@ -21,7 +21,7 @@ Lista * lista_nova() {
 }
 
 // Desaloca uma lista da memória
-Lista * lista_destruir(Lista * lst) {
+void lista_destruir(Lista * lst) {
     if(!lst)
         return;
     unsigned int tam = lst->tam;
@@ -33,7 +33,7 @@ Lista * lista_destruir(Lista * lst) {
         aux = aux2;
     }
     free(lst);
-    return NULL;
+    return;
 }
 
 // Insere um item no início da lista
