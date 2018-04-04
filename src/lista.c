@@ -22,6 +22,8 @@ Lista * lista_nova() {
 
 // Desaloca uma lista da memória
 void lista_destruir(Lista * lst) {
+    if(!(lst))
+        return;
     unsigned int tam = lst->tam;
     Node * aux = lst->inicio->proximo;
     while(tam--) {
@@ -46,4 +48,16 @@ Node * lista_ipush(Lista * lst, TIPO * item) {
     node->proximo->anterior = node;
     lst->inicio = node;
     return node;    
+}
+
+// Remove um item do início da lista
+// retorna null caso a lista esteja vazia
+Node * lista_ipop(Lista * lst) {
+    if(!(lst->inicio))
+        return NULL;
+    Node * node = lst->inicio;
+    lst->inicio = node->proximo;
+    lst->inicio->anterior = NULL;
+    node->proximo = NULL;
+    return node;
 }
