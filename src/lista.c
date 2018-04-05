@@ -103,3 +103,35 @@ Node * lista_fpop(Lista * lst) {
     node->anterior = node->proximo = NULL;
     return node;
 }
+
+// Busca um item na lista
+// retorna null caso seja uma lista vazia ou
+// item não encontrado
+Node * lista_buscar(Lista * lst, TIPO * item) {
+    if(!lst->tam)
+        return NULL;
+    unsigned int tam = lst->tam;
+    Node * aux = lst->inicio;
+    while(--tam) {
+        if(aux->valor == item)
+            return aux;
+        else
+            aux = aux->proximo;
+    }
+    return NULL;
+}
+
+// Busca um node na lista baseado no index entregue
+// retorna null caso seja uma lista vazia ou
+// index de valor maior que o tamanho da lista
+Node * lista_encontrar(Lista * lst, unsigned int index) {
+    if(!lst->tam)
+        return NULL;
+    unsigned int tam = lst->tam;
+    Node * aux = lst->inicio;
+    if(index < tam) {
+        while(index--) aux = aux->proximo;
+        return aux;
+    }
+    return NULL;
+}

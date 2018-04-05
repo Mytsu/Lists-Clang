@@ -52,7 +52,7 @@ Node * lista_fpush(Lista * lst, TIPO * item);
 
 Node * lista_fpop(Lista * lst);
 
-Node * lista_buscar(Lista * lst, TIPO * node);
+Node * lista_buscar(Lista * lst, TIPO * item);
 
 Node * lista_encontrar(Lista * lst, unsigned int index);
 
