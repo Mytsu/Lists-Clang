@@ -135,3 +135,69 @@ Node * lista_encontrar(Lista * lst, unsigned int index) {
     }
     return NULL;
 }
+
+// Busca um node na lista baseado no index entregue e
+// altera seu valor usando o item entregue,
+// retorna null caso seja uma lista vazia ou index
+// de valor maior que o tamanho da lista
+Node * lista_alterar(Lista * lst, unsigned int index,
+     TIPO * item) {
+    if(!lst->tam)
+        return NULL;
+    unsigned int tam = lst->tam;
+    Node * aux = lst->inicio;
+    if(index < tam) {
+        while(index--) aux = aux->proximo;
+        free(aux->valor);
+        aux->valor = item;
+        return aux;
+    }
+    return NULL;
+}
+
+// Busca um node na lista baseado no index entregue e
+// insere um novo node em seu lugar, movendo o node de 
+// index antigo para frente, retorna null caso seja uma
+// lista vazia ou index de valor maior que a lista
+Node * lista_inserir(Lista * lst, unsigned int index,
+     TIPO * item) {
+    if(!lst->tam)
+        return NULL;
+    Node * novo = (Node*)malloc(sizeof(Node));
+    novo->valor = item;
+    novo->anterior = novo->proximo = NULL;
+    unsigned int tam = lst->tam;
+    Node * aux = lst->inicio;
+    if(index < tam) {
+        while(index--) aux = aux->proximo;
+        novo->proximo = aux;
+        novo->anterior = aux->anterior;
+        aux->anterior = novo;
+        lst->tam++;
+        return novo;
+    }
+    return NULL;
+}
+
+// Remove um node da lista baseado no ponteiro do node
+// entregue, o node removido tem seus valores de anterior
+// e proximo nulos mas não é liberado da memoria
+// retorna null caso seja uma lista vazia
+Node * lista_remover(Lista * lst, Node * node) {
+    if(!lst->tam) 
+        return NULL;
+    unsigned int tam = lst->tam;
+    Node * aux = lst->inicio;
+    while(--tam) {
+        if(!(aux == node))
+            aux = aux->proximo;
+        else {
+            Node * rm = aux;
+            (aux = aux->anterior)->proximo = rm->proximo;
+            rm->anterior = rm->proximo = NULL;
+            lst->tam--;
+            return rm;
+        }
+    }
+    return NULL;
+}

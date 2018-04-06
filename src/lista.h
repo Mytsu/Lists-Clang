@@ -59,7 +59,7 @@ Node * lista_encontrar(Lista * lst, unsigned int index);
 Node * lista_alterar(Lista * lst, unsigned int index,
     TIPO * item);
 
-Node * lista_inserir(Lista * lst, TIPO * item);
+Node * lista_inserir(Lista * lst, unsigned int index, TIPO * item);
 
 Node * lista_remover(Lista * lst, Node * node);
 
