@@ -8,6 +8,27 @@
 
 #include "lista.h"
 
+// Implementação do Node
+
+// Cria um novo node, sem ponteiros para anterior e
+// proximo, retorna o node com o valor entregue
+Node * lista_novo_node(TIPO * valor) {
+    Node * node;
+    if(!(node =(Node*)malloc(sizeof(Node))))
+        return NULL;
+    node->anterior = node->proximo = NULL;
+    node->valor = valor;
+    return node;
+}
+
+void lista_destruir_node(Node * node) {
+    free(node->valor);
+    free(node);
+    return;
+}
+
+// Implementação de LDE
+
 // Cria uma nova lista
 // retorna null se falhar na alocação da lista
 Lista * lista_nova() {
@@ -39,13 +60,10 @@ void lista_destruir(Lista * lst) {
 // Insere um item no início da lista
 // retorna null se falhar na alocação do node
 Node * lista_ipush(Lista * lst, TIPO * item) {
-    Node * node;
-    if(!(node = (Node*)malloc(sizeof(Node))))
-        return NULL;
+    Node * node = lista_novo_node(item);
     node->valor = item;
     if(lst->tam) {
-        node->proximo = lst->inicio;        
-        node->anterior = NULL;
+        node->proximo = lst->inicio;
         lst->inicio->anterior = node;
         lst->inicio = node;
     } else {
@@ -73,13 +91,10 @@ Node * lista_ipop(Lista * lst) {
 // Insere um item no fim da lista
 // retorna NULL se falhar na alocação do node
 Node * lista_fpush(Lista * lst, TIPO * item) {
-    Node * node;
-    if(!(node = (Node*)malloc(sizeof(Node))))
-        return NULL;
+    Node * node = lista_novo_node(item);
     node->valor = item;
     if(lst->tam) {
-        node->anterior = lst->fim;        
-        node->proximo = NULL;
+        node->anterior = lst->fim;
         lst->fim->proximo = node;
         lst->fim = node;
     } else {
@@ -159,19 +174,19 @@ Node * lista_alterar(Lista * lst, unsigned int index,
 // insere um novo node em seu lugar, movendo o node de 
 // index antigo para frente, retorna null caso seja uma
 // lista vazia ou index de valor maior que a lista
+// ou falha ao alocar o novo node
 Node * lista_inserir(Lista * lst, unsigned int index,
      TIPO * item) {
     if(!lst->tam)
         return NULL;
-    Node * novo = (Node*)malloc(sizeof(Node));
-    novo->valor = item;
-    novo->anterior = novo->proximo = NULL;
+    Node * novo = lista_novo_node(item);
     unsigned int tam = lst->tam;
     Node * aux = lst->inicio;
     if(index < tam) {
         while(index--) aux = aux->proximo;
         novo->proximo = aux;
         novo->anterior = aux->anterior;
+        novo->anterior->proximo = novo;
         aux->anterior = novo;
         lst->tam++;
         return novo;
