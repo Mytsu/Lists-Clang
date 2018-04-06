@@ -142,9 +142,8 @@ Node * lista_buscar(Lista * lst, TIPO * item) {
 Node * lista_encontrar(Lista * lst, unsigned int index) {
     if(!lst->tam)
         return NULL;
-    unsigned int tam = lst->tam;
     Node * aux = lst->inicio;
-    if(index < tam) {
+    if(index < lst->tam) {
         while(index--) aux = aux->proximo;
         return aux;
     }
@@ -159,9 +158,8 @@ Node * lista_alterar(Lista * lst, unsigned int index,
      TIPO * item) {
     if(!lst->tam)
         return NULL;
-    unsigned int tam = lst->tam;
     Node * aux = lst->inicio;
-    if(index < tam) {
+    if(index < lst->tam) {
         while(index--) aux = aux->proximo;
         free(aux->valor);
         aux->valor = item;
@@ -180,9 +178,8 @@ Node * lista_inserir(Lista * lst, unsigned int index,
     if(!lst->tam)
         return NULL;
     Node * novo = lista_novo_node(item);
-    unsigned int tam = lst->tam;
     Node * aux = lst->inicio;
-    if(index < tam) {
+    if(index < lst->tam) {
         while(index--) aux = aux->proximo;
         novo->proximo = aux;
         novo->anterior = aux->anterior;
