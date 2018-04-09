@@ -33,14 +33,12 @@ Node * lista_iterador(Node * node, Iterador it) {
     switch(it) {
         case LISTA_INICIO:
             return node->anterior;
-        break;
-
+            break;
         case LISTA_FIM:
             return node->proximo;
-        break;
-
+            break;
         default:
-        break;
+            break;
     }
 }
 
