@@ -146,7 +146,7 @@ Node * lista_buscar(Lista * lst, TIPO * item) {
         if(aux->valor == item)
             return aux;
         else
-            aux = aux->proximo;
+            aux = lista_iterador(aux, LISTA_FIM);
     }
     return NULL;
 }
@@ -159,7 +159,7 @@ Node * lista_encontrar(Lista * lst, unsigned int index) {
         return NULL;
     Node * aux = lst->inicio;
     if(index < lst->tam) {
-        while(index--) aux = aux->proximo;
+        while(index--) aux = lista_iterador(aux, LISTA_FIM);
         return aux;
     }
     return NULL;
@@ -175,7 +175,7 @@ Node * lista_alterar(Lista * lst, unsigned int index,
         return NULL;
     Node * aux = lst->inicio;
     if(index < lst->tam) {
-        while(index--) aux = aux->proximo;
+        while(index--) aux = lista_iterador(aux, LISTA_FIM);
         free(aux->valor);
         aux->valor = item;
         return aux;
@@ -195,7 +195,7 @@ Node * lista_inserir(Lista * lst, unsigned int index,
     Node * novo = lista_novo_node(item);
     Node * aux = lst->inicio;
     if(index < lst->tam) {
-        while(index--) aux = aux->proximo;
+        while(index--) aux = lista_iterador(aux, LISTA_FIM);
         novo->proximo = aux;
         novo->anterior = aux->anterior;
         novo->anterior->proximo = novo;
@@ -217,7 +217,7 @@ Node * lista_remover(Lista * lst, Node * node) {
     Node * aux = lst->inicio;
     while(--tam) {
         if(!(aux == node))
-            aux = aux->proximo;
+            aux = lista_iterador(aux, LISTA_FIM);
         else {
             Node * rm = aux;
             (aux = aux->anterior)->proximo = rm->proximo;
