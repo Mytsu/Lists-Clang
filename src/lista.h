@@ -32,11 +32,20 @@ typedef struct lista {
     struct node * fim;
 } Lista;
 
+typedef enum {
+    LISTA_INICIO,
+    LISTA_FIM
+} Iterador;
+
 // Prototipos de node
 
 Node * lista_novo_node(TIPO * valor);
 
 void lista_destruir_node(Node * node);
+
+// Prototipos do iterador
+
+Node * lista_iterador(Node * node, Iterador it);
 
 // Prototipos de lista
 

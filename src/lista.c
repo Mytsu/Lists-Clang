@@ -27,6 +27,23 @@ void lista_destruir_node(Node * node) {
     return;
 }
 
+// Implementação do Iterador
+
+Node * lista_iterador(Node * node, Iterador it) {
+    switch(it) {
+        case LISTA_INICIO:
+            return node->anterior;
+        break;
+
+        case LISTA_FIM:
+            return node->proximo;
+        break;
+
+        default:
+        break;
+    }
+}
+
 // Implementação de LDE
 
 // Cria uma nova lista
