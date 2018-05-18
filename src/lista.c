@@ -21,10 +21,16 @@ Node * lista_novo_node(TIPO * valor) {
     return node;
 }
 
-void lista_destruir_node(Node * node) {
-    free(node->valor);
+TIPO * lista_valor(Node * n) {
+    return n->valor;
+}
+
+TIPO * lista_destruir_node(Node * node) {
+    if(node == NULL)
+        return NULL;
+    TIPO * valor = node->valor;
     free(node);
-    return;
+    return valor;
 }
 
 // Implementação do Iterador
@@ -70,6 +76,10 @@ void lista_destruir(Lista * lst) {
     }
     free(lst);
     return;
+}
+
+Node * lista_inicio(Lista * lst) {
+    return lst->inicio;
 }
 
 // Insere um item no início da lista
@@ -227,4 +237,8 @@ Node * lista_remover(Lista * lst, Node * node) {
         }
     }
     return NULL;
+}
+
+int lista_tamanho(Lista * lst) {
+	return lst->tam;
 }

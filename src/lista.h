@@ -18,7 +18,7 @@ extern "C" {
 // Versão do código
 #define VERSAO_LISTA "0.1"
 // Tipo de dado armazenado na lista
-#define TIPO int
+#define TIPO void
 
 typedef struct node {
     TIPO * valor;
@@ -41,7 +41,9 @@ typedef enum {
 
 Node * lista_novo_node(TIPO * valor);
 
-void lista_destruir_node(Node * node);
+TIPO * lista_valor(Node * n);
+
+TIPO * lista_destruir_node(Node * node);
 
 // Prototipos do iterador
 
@@ -52,6 +54,8 @@ Node * lista_iterador(Node * node, Iterador it);
 Lista * lista_nova();
 
 void lista_destruir(Lista * lst);
+
+Node * lista_inicio(Lista * lst);
 
 Node * lista_ipush(Lista * lst, TIPO * item);
 
@@ -72,8 +76,11 @@ Node * lista_inserir(Lista * lst, unsigned int index, TIPO * item);
 
 Node * lista_remover(Lista * lst, Node * node);
 
+int lista_tamanho(Lista * lst);
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* LISTA_H */
+
